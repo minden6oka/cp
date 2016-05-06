@@ -1,0 +1,28 @@
+﻿<Page x:Class="CinemaProject.MovieListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="750"
+	Title="MovieListPage">
+
+    <Grid>
+        <ListBox Background="Black" SelectedItem="{Binding SelectedMovie}" ItemsSource="{Binding Path=Movies,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="740"/>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Width="140" Height="250" MouseLeftButtonDown="UIElement_OnMouseLeftButtonDown">
+                        <Image Source="{Binding Img.Source}" Width="137" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6"/>
+                        <Label Content="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Ravie"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Page>

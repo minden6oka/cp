@@ -1,0 +1,9 @@
+﻿<Window x:Class="CinemaProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" SizeToContent="WidthAndHeight" Loaded="Window_Loaded" Closed="MainWindow_OnClosed">
+    <Grid Background="Black" Height="720" Width="1024">
+        <Frame x:Name="MainFrame" Content="" NavigationUIVisibility="Hidden"/>
+        
+    </Grid>
+</Window>

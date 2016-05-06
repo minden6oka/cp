@@ -1,0 +1,134 @@
+﻿<Page x:Class="CinemaProject.UserPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:CinemaProject"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1024"
+	Title="UserPage" Loaded="Page_Loaded">
+    <Grid Background="Black">
+        <Grid.Resources>
+            <local:ByteArrayToImageSourceConverter x:Key="ByteArrayToImageSourceConverter"></local:ByteArrayToImageSourceConverter>
+        </Grid.Resources>
+        <!--MovieSelection works-->
+        <Grid Visibility="{Binding MovieListVisibility}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="600" Width="750" Margin="20">
+            <Border BorderBrush="White" BorderThickness="2"/>
+            <ListBox Background="Black" SelectionChanged="Selector_OnSelectionChanged" SelectedItem="{Binding SelectedMovie}" ItemsSource="{Binding Path=Movies,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top" Width="740"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <StackPanel Width="140" Height="250">
+                                <Image Source="{Binding Bmp,Converter={StaticResource ByteArrayToImageSourceConverter}}" Width="137" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="6"/>
+                                <Label Content="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Ravie"/>
+                            </StackPanel>
+                            <Border BorderBrush="Gray" BorderThickness="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <!--Show selected movie Needs better escription(make converter listbox combo) needs reservation and comment button also needs a rate logic-->
+        <Grid Visibility="{Binding ShowMovieVisibility}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="600" Width="750" Margin="20">
+            <Border BorderBrush="White" BorderThickness="2"/>
+            <Image HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20" Width="250" Height="375" Source="{Binding SelectedMovie.Bmp,Converter={StaticResource ByteArrayToImageSourceConverter}}"/>
+            <Button Content="Back" Foreground="White" Background="Black" FontSize="20" HorizontalAlignment="Left" Margin="20,410,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Back_Click" />
+            <Button Content="Reservation" Foreground="White" Background="Black" FontSize="20" HorizontalAlignment="Left" Margin="185,410,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Reservation_Click" />
+            <Button Content="Comment" Foreground="White" Background="Black" FontSize="20" HorizontalAlignment="Left" Margin="350,410,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Comment_Click" />
+            <Button Content="Rate" Foreground="White" Background="Black" FontSize="20" HorizontalAlignment="Left" Margin="242,475,0,0" VerticalAlignment="Top" Width="150" Height="50" Click="Rate_Click" />
+            <Label Content="{Binding SelectedMovie.Title}" ContentStringFormat="Title: {0}" Foreground="White" FontSize="18"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,20,0,0" FontFamily="Rockwell Extra Bold"/>
+            <Label Content="{Binding SelectedMovie.Length}" ContentStringFormat="Length: {0} minutes" Foreground="White" FontSize="18"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,60,0,0" FontFamily="Rockwell Extra Bold"/>
+            <Label Content="{Binding SelectedMovie.RatingValue }" ContentStringFormat="Rating: {0:n2}" Foreground="White" FontSize="18"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,100,0,0" FontFamily="Rockwell Extra Bold"/>
+            <Label Content="{Binding SelectedMovie.RatingType1}" Foreground="White" FontSize="18"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="400,100,0,0" FontFamily="Rockwell Extra Bold"/>
+            <TextBlock TextWrapping="Wrap" Text="{Binding SelectedMovie.Description}"  Foreground="White" FontSize="18" ClipToBounds="True"
+                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="300,140,0,0" FontFamily="Rockwell Extra Bold" MaxWidth="704" MaxHeight="255">
+            </TextBlock>
+            <ComboBox SelectedItem="{Binding SelectedType}" ItemsSource="{Binding RatingTypos}" Background="Gray"  Foreground="White" FontSize="18"
+                       HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,475,0,0" Width="200">
+                <ComboBox.ItemContainerStyle>
+                    <Style TargetType="ComboBoxItem">
+                        <Setter Property="Background" Value="Black"/>
+                    </Style>
+                </ComboBox.ItemContainerStyle>
+            </ComboBox>
+        </Grid>
+        <!--Filter works fine-->
+        <TextBox Visibility="{Binding MovieListVisibility}" HorizontalAlignment="Right" VerticalAlignment="Top" Width="250" FontSize="18" Margin="0,55,20,0" 
+                 Text="{Binding FilterText,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                 Background="Black" Foreground="White" PreviewKeyUp="Filter_OnPreviewKeyUp"/>
+        <Label Content="Search:" FontSize="18" Foreground="White" HorizontalAlignment="Left" Margin="682,55,0,0" VerticalAlignment="Top" Visibility="{Binding MovieListVisibility}"/>
+        <!--User data and editor date of birth needs a datepicker-->
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="214" Height="680" Margin="20,20,0,0">
+            <Border BorderBrush="White" BorderThickness="2"/>
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" Margin="10" Width="194" Height="660">
+                <Label Content="Nickname:" Foreground="White" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Width="194" Text="{Binding CurrentUser.NickName}" IsReadOnly="{Binding CanEdit}" BorderThickness="0" Background="{Binding EditColor}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" MaxWidth="194"/>
+                <Label Content="Email:" Foreground="White" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Width="194" Text="{Binding CurrentUser.Email}" IsReadOnly="{Binding CanEdit}" BorderThickness="0" Background="{Binding EditColor}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" MaxWidth="194"/>
+                <Label Content="Date of birth:" Foreground="White" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                <TextBox Width="194" Text="{Binding CurrentUser.Birth}" IsReadOnly="{Binding CanEdit}" BorderThickness="0" Background="{Binding EditColor}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" MaxWidth="194"/>
+                <Label Content="Gender:" Foreground="White" FontSize="16" />
+                <Label Width="194" Visibility="{Binding GenderVisibility}" Content="{Binding GenderSTH}" BorderThickness="0" Background="{Binding EditColor}" Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14" MaxWidth="194"/>
+                <ComboBox  Visibility="{Binding EditVisibility}" SelectedItem="{Binding SelectedGender}" ItemsSource="{Binding GenderTypes}" Background="Gray" Foreground="White" FontSize="18">
+                     <ComboBox.ItemContainerStyle>
+                         <Style TargetType="ComboBoxItem">
+                             <Setter Property="Background" Value="Gray"/>
+                         </Style>
+                     </ComboBox.ItemContainerStyle>
+                </ComboBox>
+                <StackPanel Visibility="{Binding EditVisibility}">
+                    <Label Content="Old password:" Foreground="White" FontSize="16" />
+                    <PasswordBox x:Name="oldPW" Background="Gray" FontSize="18" Foreground="White"/>
+                    <Label Content="New password:" Foreground="White" FontSize="16"/>
+                    <PasswordBox x:Name="newPW" Background="Gray" FontSize="18" Foreground="White"/>
+                    <Label Content="Verify new password:" Foreground="White" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <PasswordBox x:Name="verifyPW" Background="Gray" FontSize="18" Foreground="White"/>
+                </StackPanel>
+                <Button Background="Black" Foreground="White" Content="Edit" FontSize="16" Height="50" Click="Edit_Click"/>
+                <Button Visibility="{Binding EditVisibility}" Background="Black" Foreground="White" Content="Cancel" FontSize="16" Height="50" Click="Cancel_Click"/>
+            </StackPanel>
+        </Grid>
+        <!--this will be for comments. Big listbox that shows comments(get them from server) big Textbox or block at top and a simply back and comment button at side for average user and delete ban for moderator in extra-->
+        <Grid Visibility="{Binding CommentVisibility}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20" Width="750" Height="600" Background="Black">
+            <Border BorderBrush="White" BorderThickness="2" >
+            </Border>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10">
+                <Button Content="Back" FontSize="18" Width="100" Height="30" Background="Black" Foreground="White" Click="CommentBack_Click"/>
+                <Button Content="Comment" FontSize="18" Width="100" Height="30" Background="Black" Foreground="White" Click="CommentClick_Click"/>
+                <Button Content="Delete" FontSize="18" Width="100" Height="30" Background="Black" Foreground="White" Click="DeleteComment_Click"/>
+                <Button Content="Ban" FontSize="18" Width="100" Height="30" Background="Black" Foreground="White"/>
+            </StackPanel>
+            <TextBox TextWrapping="Wrap" Text="{Binding CommentText}" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10" Width="620" Height="120" Background="Black" Foreground="White" MaxLength="200"/>
+       <ListBox HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,140,0,0" Width="730" Height="450" Background="Gray" 
+                ItemsSource="{Binding Comments}" SelectedItem="">
+           <ListBox.ItemTemplate>
+               <DataTemplate>
+                   <Grid Width="700" Height="70">
+                       <StackPanel>
+                           <Label Content="{Binding NickName}"/>
+                           <Label Content="{Binding Content}"/>
+                       </StackPanel>
+                   </Grid>
+               </DataTemplate>
+           </ListBox.ItemTemplate>
+       </ListBox>
+        </Grid>
+        <!--
+        ask server for dates and rooms
+        if there is date then generate a room using some simple rectangles and summon satan
+        -->
+        <Grid>
+            
+        </Grid>
+    </Grid>
+</Page>

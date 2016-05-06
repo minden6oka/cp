@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="2caa37ea-e37a-4b63-91b4-9525cb150008" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="item.xsd" MetadataType="Schema" ID="f15c5866-82be-4ae4-803a-1fdebd57123e" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?xsd=xsd3" />
+    <MetadataFile FileName="item.disco" MetadataType="Disco" ID="ae1e94ff-d4bf-40a7-9e44-fe77d4f85f5c" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?disco" />
+    <MetadataFile FileName="item1.xsd" MetadataType="Schema" ID="d2fe3309-23d8-419e-8974-98618370cda5" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?xsd=xsd0" />
+    <MetadataFile FileName="item2.xsd" MetadataType="Schema" ID="6121cfa5-3d6c-4032-a6fb-0c06ea75e258" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?xsd=xsd1" />
+    <MetadataFile FileName="CService.wsdl" MetadataType="Wsdl" ID="6d1a4612-d213-4a53-948b-68b5e836ce68" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?wsdl" />
+    <MetadataFile FileName="item3.xsd" MetadataType="Schema" ID="d8c209b8-288a-48a0-bb15-37e90df615ba" SourceId="1" SourceUrl="http://localhost:8733/Design_Time_Addresses/CinemaServiceDLL/CService/?xsd=xsd2" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
